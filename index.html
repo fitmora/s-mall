@@ -372,6 +372,8 @@ const AUTH_URL = "https://primary-production-97a64.up.railway.app/webhook/member
 const SESSION_KEY = 'small_mokmagyo_session';
 const SESSION_TTL = 3600000; // 1시간
 const currentCrew = '목마교';
+const ORDER_VENDOR = '영산';
+const ORDER_CAMPAIGN = '2026-07 온유어마크 공동구매';
 
 function normalizeCrew(value) {
   return String(value ?? '').trim();
@@ -901,6 +903,8 @@ function buildPayload(){
   const buyer = {
     name:    $('#buyer_name').value.trim(),
     crew_name: currentCrew,
+    vendor: ORDER_VENDOR,
+    campaign: ORDER_CAMPAIGN,
     phone:   formatPhoneKR($('#buyer_phone').value),
     email:   $('#buyer_email').value.trim(),
     address: ($('#buyer_addr').value.trim() + ' ' + $('#buyer_addr_detail').value.trim()).trim(),
