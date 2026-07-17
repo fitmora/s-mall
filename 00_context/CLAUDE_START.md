@@ -10,9 +10,9 @@
 
 ---
 
-## 절대 분리 원칙
+## 저장소 경계
 
-- 기존 `witee.co.kr` / `fitmora/groupbuy-form`은 기존 목마교·썬데이서울 주문폼 운영용 저장소입니다.
+- 기존 `witee.co.kr` / `fitmora/groupbuy-form`은 목마교·썬데이서울 주문폼 운영을 위해 당분간 유지하며, 장기적으로 프론트를 `s-mall`로 통합할 예정입니다.
 - 기존 공유 링크(회원들이 이미 사용 중인 주문폼 URL) 보호가 최우선입니다.
 - SMALL 작업에서 `groupbuy-form` 프론트를 직접 수정하지 않습니다 (n8n 백업 JSON 등 명시적으로 승인된 예외는 있었음).
 - `weecl-kr` / WEECL Checkout v1.3.4.1은 수정하지 않습니다.
@@ -101,6 +101,19 @@ notices
 
 ## n8n 기준
 
+SMALL·기존 witee 공유 n8n 기준 백업:
+
+```text
+s-mall/_docs/n8n-backup/
+```
+
+- 운영 Workflow, webhook, Google Sheet는 SMALL과 기존 witee가 계속 공유
+- JSON 복사는 Workflow 분리나 복제가 아니며, 백업 JSON의 관리 소유권만 `s-mall`로 이전
+- 2026-07 이후 공유 n8n JSON의 유일한 편집·import 기준은 위 경로
+- `groupbuy-form/_docs/n8n-backup/`의 두 기준 JSON은 전환 이전 원본이자 이후 동결된 레거시 스냅샷
+- 운영 n8n 반영은 효빠가 전체 Workflow JSON import 방식으로 수행
+- JSON은 n8n에 import하기 전까지 운영에 영향을 주지 않음
+
 `Internal Processor` 수정 내용:
 
 - `Normalize Submit Payload`에서 vendor/campaign 보존
@@ -113,7 +126,6 @@ notices
 
 ## 다음 작업
 
-- 오피스에서 n8n import 상태 / `order_list` 기록 최종 확인
-- `s-mall/_docs` 구조 정리 검토
-- n8n 백업 기준을 `s-mall/_docs/n8n-backup`으로 복사할지 검토
-- 기존 `groupbuy-form`은 아직 레거시 운영 저장소로 유지
+- 신규 크루 입점 구조 검토
+- 영산 외 벤더가 추가될 때 벤더별 주문 분기 설계
+- WEECL SELECT 카드 콘텐츠 및 연결 경로 고도화

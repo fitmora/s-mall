@@ -27,15 +27,30 @@ Codex는 항상 결과를 "통과 / 조건부 통과 / 실패"로 보고하고, 
 - `channel` 필드가 새로 추가되지 않았는지
 - `CNAME`/`howto.jpg` 변경 여부
 
-### 2. groupbuy-form n8n 백업 JSON
+### 2. 공유 n8n JSON 관리 기준
 
-- 대상: `_docs/n8n-backup/Internal Processor.json`, `Form Gateway.json`
+SMALL과 기존 witee 프론트는 같은 운영 Workflow, webhook, Google Sheet를 계속 공유합니다. 2026-07 이후 JSON의 유일한 편집·import 기준은 `s-mall/_docs/n8n-backup/`이며, `groupbuy-form/_docs/n8n-backup/`의 두 기준 JSON은 전환 시점의 레거시 스냅샷으로 동결합니다.
+
+#### 이번 전환 작업 검증
+
+- 대상: `s-mall/_docs/n8n-backup/Internal Processor.json`, `s-mall/_docs/n8n-backup/Form Gateway.json`
+- 전환 이전 원본: `groupbuy-form/_docs/n8n-backup/Internal Processor.json`, `groupbuy-form/_docs/n8n-backup/Form Gateway.json`
 - JSON 문법 유효성
-- 변경 파일 범위가 지시된 파일 하나로 국한되는지
-- diff가 지시된 노드/필드에만 국한되는지 (예: `Normalize Submit Payload`, `Build Rows (per item)`)
+- 원본과 최초 복사본의 SHA-256 및 byte 단위 일치 여부
+- `groupbuy-form` 원본과 프론트가 수정되지 않았는지
+- `s-mall` 변경이 승인된 5개 파일로 제한되는지
+- `s-mall/index.html`, `CNAME`, `howto.jpg` 및 기타 보호 파일이 수정되지 않았는지
+
+#### 전환 이후 SMALL·공유 n8n 변경 검증
+
+- 수정 대상이 `s-mall/_docs/n8n-backup/`의 JSON인지
+- `groupbuy-form`의 동결된 JSON이 변경되지 않았는지
+- 공유 webhook path가 유지되는지
+- SMALL과 기존 witee 양쪽의 영향 및 회귀를 검토했는지
 - webhook path / `webhookId` / Google Sheet credential / Spreadsheet ID 변경 여부
 - `order_list` 탭명 및 기존 컬럼명 유지 여부
-- 목적 외 변경(계좌 문구, 이메일/알림 로직, `WEECL_CRM` 로직 등) 포함 여부 — 포함 시 반드시 별도 보고
+- `order_list`, `WEECL_CRM`, 이메일 및 알림 로직에 목적 외 변경이 포함되었는지 — 포함 시 반드시 별도 보고
+- 운영 import 전 독립 검증과 효빠 승인이 있는지
 
 ### 3. weecl-kr / WEECL Checkout 보호
 
